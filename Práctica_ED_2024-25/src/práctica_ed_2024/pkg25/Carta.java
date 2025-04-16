@@ -4,10 +4,6 @@
  */
 package práctica_ed_2024.pkg25;
 
-/**
- *
- * @author carla
- */
 public class Carta {
     //atributos
     private String nombre; //símbolo asociado a la carta. 
