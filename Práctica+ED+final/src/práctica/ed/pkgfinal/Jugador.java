@@ -6,10 +6,6 @@ package práctica.ed.pkgfinal;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author r.pedroso.2023
- */
 public class Jugador {
     private String nombre; // Nombre del jugador
     private ArrayList<Carta> cartasGanadas;//Parejas encontradas

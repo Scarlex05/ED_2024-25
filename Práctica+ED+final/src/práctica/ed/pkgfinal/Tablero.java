@@ -7,10 +7,6 @@ package práctica.ed.pkgfinal;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- *
- * @author r.pedroso.2023
- */
 public class Tablero {
     private int columnas, filas; //creamos las variables int para las columnas y las filas
     private Carta[][] tablero; //creamos la variable de tipo carta para el tablero (dado a que el tablero esta hecho de cartas, no solo numeros)

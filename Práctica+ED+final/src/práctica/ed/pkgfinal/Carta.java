@@ -4,10 +4,6 @@
  */
 package práctica.ed.pkgfinal;
 
-/**
- *
- * @author r.pedroso.2023
- */
 public class Carta {
     //atributos
     private String nombre; //símbolo asociado a la carta. 

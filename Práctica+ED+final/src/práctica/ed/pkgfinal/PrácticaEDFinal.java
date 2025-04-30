@@ -6,15 +6,9 @@ package práctica.ed.pkgfinal;
 
 import java.util.Scanner;
 
-/**
- *
- * @author r.pedroso.2023
- */
 public class PrácticaEDFinal {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -43,8 +37,9 @@ public class PrácticaEDFinal {
         Jugador jugador2 = new Jugador("Jugador 2");
 
         // Inicializar baraja y tablero
+        int numero_parejas = (filas * columnas)/2;
         Baraja baraja = new Baraja();
-        baraja.inicializarBaraja();
+        baraja.inicializarBaraja(numero_parejas);
 
         Tablero tablero = new Tablero(filas, columnas);
         tablero.inicializarTablero(baraja);
@@ -64,11 +59,11 @@ public class PrácticaEDFinal {
 
             int[] n = pedirCarta(sc, tablero);
             Carta carta1 = tablero.getCarta(n[0], n[1]);
-            mostrarCartaDescubierta(carta1);
+            mostrarCartaDescubierta(carta1, n[0], n[1]);
 
             int[] m = pedirCarta(sc, tablero);
             Carta carta2 = tablero.getCarta(m[0], m[1]);
-            mostrarCartaDescubierta(carta2);
+            mostrarCartaDescubierta(carta2, n[0], n[1]);
 
             if (carta1 != null && carta2 != null && carta1.equals(carta2) && carta1 != carta2) {
                 System.out.println("¡Pareja encontrada!");
@@ -104,41 +99,41 @@ public class PrácticaEDFinal {
     }
 
     // Pide una carta válida
-    public static int[] pedirCarta(Scanner sc, Tablero tablero) {
+    public static int[] pedirCarta(Scanner sc, Tablero tablero) { // Metodo que pide una carta al usuario //debuelve la clumna y la fila para mas adelante
         int col, fila;
         do {
             System.out.println("Introduce una columna entre 0 y " + (tablero.getColumnas() - 1) + ":");
-            col = sc.nextInt();
+            col = sc.nextInt(); // guarda el numero de columna
             System.out.println("Introduce una fila entre 0 y " + (tablero.getFilas() - 1) + ":");
-            fila = sc.nextInt();
+            fila = sc.nextInt(); // guarda el numero de fila
             if(!posicionValida(col, fila, tablero)){
-                System.out.println("Error: posición no válida.");
+                System.out.println("Error: posición no válida."); // en caso de posicion no valia o posicion repetida, da error
             }
-        } while(!posicionValida(col, fila, tablero));
-        int[] n = new int[2];
-        n[0] = fila;
-        n[1] = col;
-        return n;
+        } while(!posicionValida(col, fila, tablero)); // si ha habido una posicion no valida, se vuelve a ejercutar el bucle y pide de nuevo columnas y filas
+        int[] n = new int[2]; //para guardar 
+        n[0] = fila; //guardamos la fila
+        n[1] = col; // guardamos la columna
+        return n; // debolvemos la fila y la columna
     }
 
-    public static void mostrarCartaDescubierta(Carta c) {
-        if (c != null) {
-            System.out.println("En la posición seleccionada se encuentra la carta " + c.GetNombre() + ".");
+    public static void mostrarCartaDescubierta(Carta c, int n, int m) { //Nos dice el nombre de la carta elegida
+        if (c != null) { // comprobamos si la carta existe
+            System.out.println("En la posición seleccionada ("+m+", "+n+") se encuentra la carta " + c.GetNombre() + "."); // devolvemos la carta de pa posicion (m,n)
         }
     }
     
-    public static boolean posicionValida(int col, int fila, Tablero tablero){
-        if((col > tablero.getColumnas() || col < 0) || (fila > tablero.getFilas() || fila < 0)){
-            return false;
+    public static boolean posicionValida(int col, int fila, Tablero tablero){ // metodo que comprueba que la posición elegida sea valida
+        if((col > tablero.getColumnas() || col < 0) || (fila > tablero.getFilas() || fila < 0)){ // comporbamos que el numero de fila o columna exista
+            return false; // si no existe el numero de fila o columna, la posicion no es valida
         }
         
-        Carta carta = tablero.getCarta(fila, col);
+        Carta carta = tablero.getCarta(fila, col); // obtenemos la carta en esa posicion
         
         if(carta.Getrevelada()){
-            return false;
+            return false; // si la carta ya ha sido revelada, la posicion no es valida
         }
             
-        return true;
+        return true; // en caso de que ninguna de las dos conciciones sea cierta, devolvemos true y la posicion si es valida
     }
     
 }
